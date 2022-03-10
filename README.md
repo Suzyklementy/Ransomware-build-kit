@@ -26,7 +26,7 @@
 
 <h4>Special Thanks</h4>
 
-<p>Program was based of program from my programing lessons Giganci Programowania <a target="_blank">https://www.giganciprogramowania.edu.pl/?gclid=CjwKCAiA4KaRBhBdEiwAZi1zzmfItvwaDPiW1EuFwcQiIASJxwNK-mV0IyHsJdYe262XM2BgCQkgoRoCbb4QAvD_BwE#nauka_online</a></p>
+<p>Program was based of program from my programing lessons Giganci Programowania https://www.giganciprogramowania.edu.pl/?gclid=CjwKCAiA4KaRBhBdEiwAZi1zzmfItvwaDPiW1EuFwcQiIASJxwNK-mV0IyHsJdYe262XM2BgCQkgoRoCbb4QAvD_BwE#nauka_online</p>
 
 <h4>Legal warning</h4>
 
